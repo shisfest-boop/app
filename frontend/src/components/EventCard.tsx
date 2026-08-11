@@ -1,5 +1,6 @@
 import { EventData } from "@/data/events";
 import { CategoryIcon } from "@/components/CategoryIcon";
+import { EventIcon } from "@/components/EventIcon";
 
 interface EventCardProps {
   event: EventData;
@@ -32,6 +33,7 @@ export const EventCard = ({ event, delay = 0, onView }: EventCardProps) => (
     </div>
 
     <h3 className="event-card-title" data-testid={`event-card-title-${event.id}`}>
+      <EventIcon eventId={event.id} size={16} className="event-card-title-icon" />
       {event.title}
     </h3>
     {event.nativeTitle && (

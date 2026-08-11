@@ -1,3 +1,4 @@
+import { Clock, Sparkles, Award } from "lucide-react";
 import { site } from "@/config/site";
 
 const timelineSteps = [
@@ -5,16 +6,19 @@ const timelineSteps = [
     time: site.eventDetails.reportingTime,
     title: "Reporting Time",
     desc: "All participants must report to the venue and complete check-in.",
+    icon: Clock,
   },
   {
     time: site.eventDetails.date,
     title: "Competitions",
     desc: site.schedule.competitionsNote,
+    icon: Sparkles,
   },
   {
     time: site.eventDetails.date,
     title: "Closing Ceremony",
     desc: site.schedule.closingCeremony,
+    icon: Award,
   },
 ];
 
@@ -34,7 +38,9 @@ export const FestSchedule = () => (
           data-testid={`timeline-step-${i}`}
         >
           <div className="timeline-marker">
-            <span className="timeline-dot" />
+            <span className="timeline-icon-badge">
+              <step.icon size={14} strokeWidth={1.75} />
+            </span>
             {i < timelineSteps.length - 1 && <span className="timeline-line" />}
           </div>
           <div className="timeline-content">

@@ -716,11 +716,19 @@
     text-align: right;
 }
 .event-card-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
     font-family: "Bricolage Grotesque", sans-serif;
     font-weight: 700;
     font-size: 1.15rem;
     letter-spacing: -0.01em;
     line-height: 1.2;
+}
+.event-card-title-icon {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--gold);
 }
 .event-card-native {
     font-size: 0.95rem;
@@ -837,13 +845,20 @@
     color: var(--gold);
 }
 .event-modal-title {
-    display: block;
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
     font-family: "Bricolage Grotesque", sans-serif;
     font-weight: 800;
     font-size: 1.4rem;
     letter-spacing: -0.01em;
     line-height: 1.15;
     margin-top: 4px;
+}
+.event-modal-title-icon {
+    flex-shrink: 0;
+    margin-top: 4px;
+    color: var(--gold);
 }
 .event-modal-native {
     font-size: 1.02rem;
@@ -1074,6 +1089,36 @@
     margin-top: 5px;
 }
 
+/* ---------- add to calendar ---------- */
+.add-calendar {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    opacity: 0;
+    animation: riseIn 0.7s ease forwards;
+    animation-delay: 0.95s;
+}
+.add-calendar-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: "Space Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: 1px solid var(--gold-dim);
+    padding-bottom: 2px;
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+.add-calendar-link:hover {
+    color: #711824;
+    border-color: #711824;
+}
+
 /* ---------- fest schedule timeline ---------- */
 .timeline {
     margin-top: 8px;
@@ -1088,21 +1133,25 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 4px;
 }
-.timeline-dot {
-    width: 9px;
-    height: 9px;
+.timeline-icon-badge {
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    background: var(--gold);
+    border: 1px solid var(--gold-dim);
+    background: var(--ink);
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
 }
 .timeline-line {
     flex: 1;
     width: 1px;
     background: var(--line-strong);
-    margin: 4px 0;
-    min-height: 34px;
+    margin: 6px 0;
+    min-height: 24px;
 }
 .timeline-content {
     padding-bottom: 26px;

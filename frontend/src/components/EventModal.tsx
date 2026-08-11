@@ -1,6 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import { EventData } from "@/data/events";
+import { EventIcon } from "@/components/EventIcon";
 
 interface EventModalProps {
   event: EventData | null;
@@ -25,6 +26,7 @@ export const EventModal = ({ event, onClose }: EventModalProps) => (
                   {event.category}
                 </span>
                 <Dialog.Title className="event-modal-title" data-testid="event-modal-title">
+                  <EventIcon eventId={event.id} size={19} className="event-modal-title-icon" />
                   {event.title}
                 </Dialog.Title>
                 {event.nativeTitle && (
