@@ -586,6 +586,87 @@
     margin-top: 0;
 }
 
+.view-toggle {
+    display: flex;
+    gap: 8px;
+    margin: 20px 0 4px;
+}
+
+/* ---------- competition directory table ---------- */
+.directory-wrap {
+    margin-top: 24px;
+    border: 1px solid var(--line-strong);
+    overflow-x: auto;
+}
+.directory-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.directory-table th,
+.directory-table td {
+    text-align: left;
+    padding: 13px 16px;
+    border-bottom: 1px dashed var(--line);
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    color: rgba(22, 18, 19, 0.75);
+}
+.directory-table thead th {
+    font-family: "Space Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(22, 18, 19, 0.45);
+    border-bottom: 1px solid var(--line-strong);
+    background: rgba(139, 30, 47, 0.02);
+    white-space: nowrap;
+}
+.directory-table tbody tr:last-child td {
+    border-bottom: none;
+}
+.directory-table tbody tr:hover {
+    background: rgba(139, 30, 47, 0.025);
+}
+@media (max-width: 640px) {
+    .directory-table thead {
+        display: none;
+    }
+    .directory-table,
+    .directory-table tbody,
+    .directory-table tr,
+    .directory-table td {
+        display: block;
+        width: 100%;
+    }
+    .directory-table tr {
+        border-bottom: 1px solid var(--line-strong);
+        padding: 10px 0;
+    }
+    .directory-table tbody tr:last-child {
+        border-bottom: none;
+    }
+    .directory-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+        padding: 6px 16px;
+        border-bottom: none;
+        white-space: normal;
+        text-align: right;
+    }
+    .directory-table td::before {
+        content: attr(data-label);
+        font-family: "Space Mono", monospace;
+        font-size: 9.5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: rgba(22, 18, 19, 0.4);
+        flex-shrink: 0;
+        text-align: left;
+    }
+}
+
 .event-card {
     display: flex;
     flex-direction: column;

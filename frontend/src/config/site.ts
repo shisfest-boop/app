@@ -34,8 +34,7 @@ export const site = {
     contact: "https://www.shisfest.com/blank-4",
     email: "mailto:shisfest@scottishigh.com",
     instagram: "https://instagram.com/shisfest26",
-    competitionDetails:
-      "https://docs.google.com/spreadsheets/d/1xkAKZvpqcmfrTRej8bHDUMaMeKpfqsQP3GSHaC7OKRE/edit?usp=sharing",
+    rulebookPdf: "/assets/shisfest26-rulebook.pdf",
   },
   logos: {
     fest: "/assets/shisfest-logo.png",

@@ -18,14 +18,6 @@ export const CTASection = () => (
       testId="cta-explore"
     />
 
-    <PassCard
-      num="—"
-      label="Competition Details"
-      href={site.urls.competitionDetails}
-      delay={0.95}
-      testId="cta-competition-details"
-    />
-
     <div className="group-label">Registration</div>
     <div className="reg-group">
       <PassCard

@@ -1,0 +1,33 @@
+{
+  "summary": "Verified removal of Competition Details CTASection card on Home page, and new Download Rulebook link + Grid/Directory toggle + DirectoryTable feature on /events page. All core flows work correctly with real events.ts data, no invented data, no console errors, mobile responsive collapse works as expected.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Events page (Directory view, desktop >=1024px)", "issues": ["Directory table wrap has overflow-x:auto and the outer content column is narrow (~710px), so the 4-column table (scrollWidth 1120px) requires horizontal scrolling within the table box even on a 1920px desktop viewport, cutting off part of the 'Participants' column visually until scrolled. This matches the site's existing narrow-column design pattern (consistent with Home/Grid page) and is NOT a page-level horizontal overflow bug, but visually the last column appears truncated at first glance. Minor/cosmetic, not blocking."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Optional: consider slightly widening the .directory-wrap container or reducing column padding/font-size so the 4-column table fits without needing internal horizontal scroll on desktop widths, improving first-glance readability of the Participants column."
+  ],
+  "critical_code_review_comments": [
+    "CTASection.tsx: clean removal of Competition Details PassCard, no residual references, all other cards render in correct order with no layout gap.",
+    "site.ts: urls.competitionDetails properly removed, urls.rulebookPdf added correctly.",
+    "DirectoryTable.tsx: clean component, correctly uses data-label attrs for mobile CSS collapse trick, reuses EventData type — good DRY practice.",
+    "Events.tsx: view toggle and filteredEvents state correctly shared between grid/directory views; toggling category filter while in Directory view correctly re-filters rows.",
+    "index.css: mobile @media (max-width:640px) collapse-to-card CSS works flawlessly — verified visually at 375px, zero horizontal overflow.",
+    "PDF asset verified: HTTP 200, content starts with %PDF-1.4 magic bytes at /assets/shisfest26-rulebook.pdf."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend-only per request)", "frontend": "100%"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "All 8 test scenarios from review_request passed: (1) cta-competition-details fully removed, no gap, other 5 CTA cards intact and ordered correctly. (2) download-rulebook-link present with correct href=/assets/shisfest26-rulebook.pdf, target=_blank, PDF returns 200 with valid %PDF header. (3) view-toggle-grid/directory present below filters styled as event-filter-chip, defaults to Grid with events-grid visible. (4) Directory toggle shows directory-table with exactly 26 rows, 4 columns in correct order (Event Name, Subject/Category, Eligible Grades, Participants); spot-checked Slam Poetry (English/VI-VIII/Individual) and Quizzeria (English/IX-XII/Team of 3) against events.ts data verbatim - correct, no invented data. (5) Science filter + Directory shows exactly 4 rows (innovative-idea, mystery-box, lab-detective, bioflix) - correct. Switching back to All+Grid works without crash. (6) Mobile 375px Directory view collapses to stacked label:value cards, zero horizontal overflow confirmed via scrollWidth==innerWidth==375. (7) EventModal open/close via View Event button and Escape key works correctly in Grid view, no regressions. (8) No console errors detected on Home or Events pages during testing. Only minor cosmetic note: desktop directory table requires internal horizontal scroll within its bounded container due to site's narrow content-column design - not a blocking bug, optional polish only.",
+  "rca of the issue": "N/A - no bugs found, only one minor cosmetic/design observation about desktop table width vs narrow content column (pre-existing site-wide layout pattern, not introduced by this session's changes)."
+}
