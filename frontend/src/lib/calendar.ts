@@ -18,21 +18,3 @@ export const googleCalendarUrl = `https://calendar.google.com/calendar/render?ac
 )}&dates=${toCalendarDate(EVENT_START)}/${toCalendarDate(EVENT_END)}&details=${encodeURIComponent(
   EVENT_DESCRIPTION,
 )}&location=${encodeURIComponent(EVENT_LOCATION)}`;
-
-const icsContent = [
-  "BEGIN:VCALENDAR",
-  "VERSION:2.0",
-  "PRODID:-//SHISFEST26//EN",
-  "BEGIN:VEVENT",
-  `UID:shisfest26-${EVENT_START.getTime()}@shisfest.com`,
-  `DTSTAMP:${toCalendarDate(new Date())}`,
-  `DTSTART:${toCalendarDate(EVENT_START)}`,
-  `DTEND:${toCalendarDate(EVENT_END)}`,
-  `SUMMARY:${EVENT_TITLE}`,
-  `DESCRIPTION:${EVENT_DESCRIPTION}`,
-  `LOCATION:${EVENT_LOCATION}`,
-  "END:VEVENT",
-  "END:VCALENDAR",
-].join("\r\n");
-
-export const icsDataUrl = `data:text/calendar;charset=utf-8,${encodeURIComponent(icsContent)}`;

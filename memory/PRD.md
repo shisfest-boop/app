@@ -60,6 +60,10 @@ Componentize the working reference landing page (shisfest26.html) for SHISFEST'2
 - Removed now-unused `site.schedule.competitionsNote`/`closingCeremony` config fields (copy is now defined inline in the component since it's used in exactly one place); kept `dressCode`/`trophyNote` unchanged.
 - Self-tested (small isolated content-only change to one component): compiled cleanly, page loads, correct step order and copy confirmed via screenshot + bundle text verification. No visual/structural redesign — icons, timeline layout, dress-code/trophy sections all unchanged.
 
+## Implemented (2026-02-11, later same day #8)
+- Simplified "Add to Calendar" (Home Hero) to Google Calendar only — removed the Apple/Outlook `.ics` download option and its now-unused `icsDataUrl` export from `lib/calendar.ts`. Single button relabeled "Add to Google Calendar", same visual style, same underlying pre-fill logic (10 Oct 2026, 8:00 a.m. IST start, venue address) which was already verified correct in an earlier testing round.
+- Self-tested (single-link removal, no logic change to the retained Google link): compiles cleanly with no TS errors.
+
 ## Implemented (2026-02-11, later same day #6)
 - Universal Navbar search — visible on every page, desktop inline input + mobile icon that expands to a full-width autofocus input (mutually exclusive with the hamburger menu). Submits to `/directory?q=<term>`.
 - New dedicated `/directory` page (`Directory.tsx`) — separate from `/events`, its own on-page search (live filter by name/category, URL-synced via `useSearchParams` with `replace:true`), all 26 events as independently-toggleable accordion rows (CSS-only `grid-template-rows` expand/collapse), collapsed = icon+name+chevron only. Expanded reveals category, full untruncated description (reused from events.ts), participants, and two fields intentionally standardised for every event (not sourced per-event): Venue = "TBA", Reporting Time = "8:00 a.m., 10th October 2026".
