@@ -37,8 +37,13 @@ Componentize the working reference landing page (shisfest26.html) for SHISFEST'2
 - Home `EventsPreview` rewired to use the same EventCard/EventModal (3 featured: Slam Poetry, Tamasha, BioFlix) + "View all events" link to /events
 - Tested via testing_agent_v4: 100% pass — filters, modal open/close (3 dismiss methods), Hindi rendering, multi-round content (Quizzeria/EconQuest), incomplete-data fallback, mobile 375px layout, Home wiring all verified. No bugs found.
 
+## Implemented (2026-02-11, later same day)
+- `/contact` page built from the invite's "Get in Touch" + "Event Details" sections: Event Details info-list (date, registration deadline, venue, reporting time), Get in Touch (Email + Instagram PassCards, Teacher In-Charge "Ms. Simran Yadav" shown as plain text — no phone number anywhere), Registration reg-group (School + Individual, reused PassCard style from Home CTASection)
+- `site.ts` extended additively (`eventDetails`, `teacherInCharge`, `contactEmail`, `urls.email`) — no existing fields touched
+- New `.info-list`/`.info-row` CSS added for label/value rows, mobile-stacking at ≤480px
+- Tested via testing_agent_v4: 100% pass — exact content match to source doc, no phone numbers found anywhere on page, correct hrefs/target/rel on all links, mobile 375px no overflow, Home/Events unaffected by shared config change.
+
 ## Backlog / next tasks
-- P1: Build out Contact page (details/form, coordinator contacts)
 - P1: Countdown timer to 10th October 2026
 - P2: Day-wise Fest Schedule section
 - P2: Gallery, sponsors section
