@@ -14,9 +14,6 @@ export const Footer = () => (
           {l.label}
         </Link>
       ))}
-      <a href={site.urls.eventWebsite} target="_blank" rel="noopener" data-testid="footer-link-website">
-        Official Website
-      </a>
       <a href={site.urls.instagram} target="_blank" rel="noopener" data-testid="footer-link-instagram">
         Instagram
       </a>
