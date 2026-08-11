@@ -29,8 +29,16 @@ Componentize the working reference landing page (shisfest26.html) for SHISFEST'2
 - data-testids on all interactive elements
 - Verified: desktop + mobile screenshots, hamburger nav flow, no horizontal overflow
 
+## Implemented (2026-02-11)
+- Real event catalog: `src/data/events.ts` — 26 competitions extracted verbatim from the official "2026 INVITE.pdf" (categories: English, Sanskrit, Hindi, Science, Economics, Commerce, Mathematics, Social Science, Foreign Language, Art, Drama, Dance, Music, Psychology). Each event has title/nativeTitle, category, eligibleGrades, participants, language (en/hi), intro, sections[{heading, paragraphs, bullets}], judgingCriteria, totalMarks, teacherInCharge/studentInCharge (names only — phone/email omitted per requirement). 3 Hindi events (Prashnottri, Ekal Abhinay, Samachaar Vachan) preserved in Devanagari, not translated. 2 events (Dress Design, Ad-Lingo) have a `note` field flagging that the source PDF lacked full detail for them — no invented content.
+- `EventCard.tsx` — grid card (category tag, grade, title, excerpt, participants, "View Event" button)
+- `EventModal.tsx` — built on `@radix-ui/react-dialog` (native Escape + click-outside dismiss), renders full event content with no truncation, scrollable body, judging-criteria table, in-charge footer
+- `/events` page: category filter chips + responsive grid (1 col mobile, 2 col desktop) of all 26 events, wired to EventModal (no per-event routes — modal only)
+- Home `EventsPreview` rewired to use the same EventCard/EventModal (3 featured: Slam Poetry, Tamasha, BioFlix) + "View all events" link to /events
+- Tested via testing_agent_v4: 100% pass — filters, modal open/close (3 dismiss methods), Hindi rendering, multi-round content (Quizzeria/EconQuest), incomplete-data fallback, mobile 375px layout, Home wiring all verified. No bugs found.
+
 ## Backlog / next tasks
-- P0: Build out Events page with real competition list
-- P1: Build out Contact page (details/form)
+- P1: Build out Contact page (details/form, coordinator contacts)
 - P1: Countdown timer to 10th October 2026
-- P2: Schedule page, gallery, sponsors section
+- P2: Day-wise Fest Schedule section
+- P2: Gallery, sponsors section

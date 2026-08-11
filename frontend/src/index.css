@@ -543,6 +543,365 @@
     border-color: var(--gold);
 }
 
+/* ---------- events grid & cards ---------- */
+.event-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 28px 0 4px;
+}
+.event-filter-chip {
+    font-family: "Space Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 7px 12px;
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: rgba(22, 18, 19, 0.55);
+    cursor: pointer;
+    transition:
+        border-color 0.2s ease,
+        color 0.2s ease,
+        background 0.2s ease;
+    white-space: nowrap;
+}
+.event-filter-chip:hover {
+    border-color: var(--gold);
+    color: var(--paper);
+}
+.event-filter-chip.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #ffffff;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 24px;
+}
+.events-grid-preview {
+    margin-top: 0;
+}
+
+.event-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--line-strong);
+    background: rgba(139, 30, 47, 0.025);
+    padding: 22px;
+    opacity: 0;
+    animation: riseIn 0.6s ease forwards;
+    transition:
+        border-color 0.25s ease,
+        transform 0.2s ease,
+        background 0.25s ease;
+}
+.event-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+    background: rgba(139, 30, 47, 0.04);
+}
+.event-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+.event-card-tag {
+    font-family: "Space Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    padding: 3px 8px;
+    flex-shrink: 0;
+}
+.event-card-grades {
+    font-family: "Space Mono", monospace;
+    font-size: 10px;
+    color: rgba(22, 18, 19, 0.45);
+    letter-spacing: 0.04em;
+    text-align: right;
+}
+.event-card-title {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+}
+.event-card-native {
+    font-size: 0.95rem;
+    color: rgba(22, 18, 19, 0.55);
+    margin-top: 2px;
+}
+.event-card-desc {
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(22, 18, 19, 0.6);
+    margin-top: 10px;
+    flex: 1;
+}
+.event-card-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+}
+.event-card-participants {
+    font-family: "Space Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(22, 18, 19, 0.45);
+}
+.event-card-btn {
+    font-family: "Space Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+.event-card-btn:hover {
+    transform: translateX(3px);
+    color: #711824;
+}
+
+@media (min-width: 640px) {
+    .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ---------- event modal ---------- */
+.event-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(22, 18, 19, 0.65);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    animation: modalFadeIn 0.2s ease;
+}
+.event-modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(92vw, 620px);
+    max-height: 86vh;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--line-strong);
+    z-index: 101;
+    display: flex;
+    flex-direction: column;
+    outline: none;
+    animation: modalRiseIn 0.25s cubic-bezier(0.16, 0.9, 0.32, 1);
+}
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes modalRiseIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -46%) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+.event-modal-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 22px 22px 14px;
+    border-bottom: 1px solid var(--line);
+    flex-shrink: 0;
+}
+.event-modal-tag {
+    font-family: "Space Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+}
+.event-modal-title {
+    display: block;
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin-top: 4px;
+}
+.event-modal-native {
+    font-size: 1.02rem;
+    color: rgba(22, 18, 19, 0.6);
+    margin-top: 2px;
+}
+.event-modal-close {
+    flex-shrink: 0;
+    background: none;
+    border: 1px solid var(--line-strong);
+    color: var(--paper);
+    padding: 6px;
+    cursor: pointer;
+    transition:
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+.event-modal-close:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+.event-modal-meta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 14px 22px;
+    font-family: "Space Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(22, 18, 19, 0.55);
+    border-bottom: 1px solid var(--line);
+    flex-shrink: 0;
+}
+.event-modal-body {
+    padding: 20px 22px 26px;
+    overflow-y: auto;
+    flex: 1;
+}
+.event-modal-paragraph {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    color: rgba(22, 18, 19, 0.78);
+    margin-bottom: 12px;
+}
+.event-modal-note {
+    font-family: "Inter", sans-serif;
+    font-style: italic;
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(22, 18, 19, 0.5);
+    border-left: 2px solid var(--gold-dim);
+    padding-left: 12px;
+    margin-bottom: 16px;
+}
+.event-modal-section {
+    margin-top: 22px;
+}
+.event-modal-heading {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--gold);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px dashed var(--line);
+}
+.event-modal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.event-modal-list li {
+    font-family: "Inter", sans-serif;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: rgba(22, 18, 19, 0.75);
+    padding-left: 16px;
+    position: relative;
+}
+.event-modal-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--gold-dim);
+}
+.event-modal-criteria {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+.event-modal-criteria-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    color: rgba(22, 18, 19, 0.72);
+    padding-bottom: 7px;
+    border-bottom: 1px dotted var(--line);
+}
+.event-modal-criteria-marks {
+    font-family: "Space Mono", monospace;
+    font-size: 12px;
+    color: var(--gold);
+    flex-shrink: 0;
+}
+.event-modal-total {
+    margin-top: 10px;
+    font-family: "Space Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(22, 18, 19, 0.5);
+    text-align: right;
+}
+.event-modal-foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 16px 22px;
+    border-top: 1px solid var(--line);
+    background: rgba(139, 30, 47, 0.02);
+    flex-shrink: 0;
+}
+.event-modal-foot > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.event-modal-foot-label {
+    font-family: "Space Mono", monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(22, 18, 19, 0.4);
+}
+.event-modal-foot span:last-child {
+    font-family: "Inter", sans-serif;
+    font-size: 12.5px;
+    color: rgba(22, 18, 19, 0.75);
+}
+
 /* ---------- footer ---------- */
 footer {
     margin-top: 72px;

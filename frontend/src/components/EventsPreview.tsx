@@ -1,33 +1,35 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { events, EventData } from "@/data/events";
+import { EventCard } from "@/components/EventCard";
+import { EventModal } from "@/components/EventModal";
 
-const previewEvents = [
-  { num: "01", label: "Music & Dance", sub: "Details coming soon" },
-  { num: "02", label: "Literary & Debate", sub: "Details coming soon" },
-  { num: "03", label: "Art & Theatre", sub: "Details coming soon" },
-];
+const featuredIds = ["slam-poetry", "tamasha", "bioflix"];
 
-export const EventsPreview = () => (
-  <section data-testid="events-preview">
-    <div className="cta-heading">
-      <h2>The line-up</h2>
-      <div className="line" />
-    </div>
-    {previewEvents.map((e, i) => (
-      <Link
-        key={e.num}
-        to="/events"
-        className="pass secondary"
-        style={{ animationDelay: `${0.7 + i * 0.08}s` }}
-        data-testid={`event-preview-card-${e.num}`}
-      >
-        <div className="perf" />
-        <div>
-          <div className="num">{e.num}</div>
-          <div className="label">{e.label}</div>
-          <div className="sub">{e.sub}</div>
-        </div>
-        <span className="arrow">→</span>
+export const EventsPreview = () => {
+  const [selectedEvent, setSelectedEvent] = useState<EventData | null>(null);
+  const featured = featuredIds
+    .map((id) => events.find((e) => e.id === id))
+    .filter((e): e is EventData => Boolean(e));
+
+  return (
+    <section data-testid="events-preview">
+      <div className="cta-heading">
+        <h2>The line-up</h2>
+        <div className="line" />
+      </div>
+
+      <div className="events-grid events-grid-preview" data-testid="events-preview-grid">
+        {featured.map((event, i) => (
+          <EventCard key={event.id} event={event} delay={0.7 + i * 0.08} onView={setSelectedEvent} />
+        ))}
+      </div>
+
+      <Link to="/events" className="mini-btn" data-testid="events-preview-view-all">
+        View all {events.length} events →
       </Link>
-    ))}
-  </section>
-);
+
+      <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
+    </section>
+  );
+};
