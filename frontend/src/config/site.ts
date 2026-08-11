@@ -28,7 +28,6 @@ export const site = {
       "Students also have a chance to win something much bigger: an Overall Winner Trophy, awarded to the school that wins the maximum number of competitions. It will be informed through the website and personally to the winning school. Scottish High students may take part in all competitions but are not eligible for the School Trophy.",
   },
   urls: {
-    eventWebsite: "https://shisfest.com/",
     individualRegistration: "https://forms.gle/aLS6KmsHPV5ghwZ79",
     groupRegistration: "https://forms.gle/byc7abfP7BYjVKiL6",
     contact: "https://www.shisfest.com/blank-4",

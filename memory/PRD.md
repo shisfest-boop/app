@@ -52,6 +52,13 @@ Componentize the working reference landing page (shisfest26.html) for SHISFEST'2
 
 ## Backlog / next tasks
 - P2: Gallery, sponsors section
+- P2 (optional/FYI, not a bug): /directory's category substring search matches "Social Science" when searching "science" — intentional per spec (name/category substring match), flagged by testing as expected behavior
+
+## Implemented (2026-02-11, later same day #6)
+- Universal Navbar search — visible on every page, desktop inline input + mobile icon that expands to a full-width autofocus input (mutually exclusive with the hamburger menu). Submits to `/directory?q=<term>`.
+- New dedicated `/directory` page (`Directory.tsx`) — separate from `/events`, its own on-page search (live filter by name/category, URL-synced via `useSearchParams` with `replace:true`), all 26 events as independently-toggleable accordion rows (CSS-only `grid-template-rows` expand/collapse), collapsed = icon+name+chevron only. Expanded reveals category, full untruncated description (reused from events.ts), participants, and two fields intentionally standardised for every event (not sourced per-event): Venue = "TBA", Reporting Time = "8:00 a.m., 10th October 2026".
+- Bug fix: "Explore SHISFEST" (Home CTASection) and "Explore the event →" guidance link previously opened the old external shisfest.com — now navigate internally to `/directory` (`PassCard.tsx` now renders a react-router `Link` for internal hrefs starting with "/", still external `<a target=_blank>` otherwise). Removed unused `site.urls.eventWebsite`.
+- Tested via testing_agent_v4: 100% pass — bug fix confirmed, no navbar overlap regression at 320-390px with the new 3rd icon control, Directory search/accordion/hardcoded fields all verified, /events page confirmed unchanged, zero console errors.
 
 ## Bug Fixes (2026-02-11, later same day #3)
 - Fixed mobile Navbar overlap: brand (logo+"SHISFEST'26" text) was not shrinking on narrow viewports, overflowing into the Register Now button. Made brand `min-w-0 flex-1` with `truncate` safety fallback, reduced logo/text/button sizing on mobile (`sm:` breakpoint restores desktop sizing), gave the Register Now + hamburger control group `flex-shrink-0` so it never gets squeezed, added `whitespace-nowrap` + a `gap-2` safety-net gap.

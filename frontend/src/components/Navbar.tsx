@@ -1,10 +1,20 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Menu, X, Search } from "lucide-react";
 import { site } from "@/config/site";
 
 export const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+  const goToDirectory = () => {
+    const trimmed = query.trim();
+    navigate(trimmed ? `/directory?q=${encodeURIComponent(trimmed)}` : "/directory");
+    setSearchOpen(false);
+    setQuery("");
+  };
 
   return (
     <header
@@ -45,7 +55,27 @@ export const Navbar = () => {
           ))}
         </nav>
 
-        <div className="flex flex-shrink-0 items-center gap-1.5 sm:gap-2">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            goToDirectory();
+          }}
+          className="hidden items-center gap-2 border border-[var(--line-strong)] px-3 py-1.5 transition-colors focus-within:border-gold md:flex"
+          data-testid="nav-search-desktop"
+        >
+          <Search size={13} className="flex-shrink-0 text-[rgba(22,18,19,0.4)]" />
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search competitions…"
+            aria-label="Search competitions"
+            className="w-28 bg-transparent font-mono text-[11px] text-paper placeholder:text-[rgba(22,18,19,0.4)] focus:outline-none lg:w-40"
+            data-testid="nav-search-input"
+          />
+        </form>
+
+        <div className="flex flex-shrink-0 items-center gap-1 sm:gap-2">
           <a
             href={site.urls.groupRegistration}
             target="_blank"
@@ -58,7 +88,23 @@ export const Navbar = () => {
           <button
             type="button"
             className="p-2 text-paper md:hidden"
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => {
+              setSearchOpen((v) => !v);
+              setOpen(false);
+            }}
+            aria-label="Toggle search"
+            aria-expanded={searchOpen}
+            data-testid="nav-search-toggle"
+          >
+            {searchOpen ? <X size={19} /> : <Search size={19} />}
+          </button>
+          <button
+            type="button"
+            className="p-2 text-paper md:hidden"
+            onClick={() => {
+              setOpen((v) => !v);
+              setSearchOpen(false);
+            }}
             aria-label="Toggle navigation menu"
             aria-expanded={open}
             data-testid="nav-menu-toggle"
@@ -67,6 +113,30 @@ export const Navbar = () => {
           </button>
         </div>
       </div>
+
+      {searchOpen && (
+        <div className="border-t border-[var(--line)] bg-white md:hidden" data-testid="nav-search-mobile-wrap">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              goToDirectory();
+            }}
+            className="wrap flex items-center gap-2 py-3"
+          >
+            <Search size={15} className="flex-shrink-0 text-[rgba(22,18,19,0.4)]" />
+            <input
+              type="text"
+              autoFocus
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search competitions…"
+              aria-label="Search competitions"
+              className="w-full bg-transparent font-mono text-[13px] text-paper placeholder:text-[rgba(22,18,19,0.4)] focus:outline-none"
+              data-testid="nav-search-input-mobile"
+            />
+          </form>
+        </div>
+      )}
 
       {open && (
         <nav className="border-t border-[var(--line)] bg-white md:hidden" data-testid="nav-links-mobile">

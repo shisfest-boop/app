@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { site } from "@/config/site";
 import { PassCard } from "@/components/PassCard";
 
@@ -12,7 +13,7 @@ export const CTASection = () => (
       num="01 — MAIN GATE"
       label="Explore SHISFEST"
       sub="Competitions, rules, schedule & everything else"
-      href={site.urls.eventWebsite}
+      href="/directory"
       variant="primary"
       delay={0.9}
       testId="cta-explore"
@@ -61,15 +62,9 @@ export const CTASection = () => (
         Explore SHISFEST to discover competitions, rules, schedules and everything you need to
         participate.
       </p>
-      <a
-        className="mini-btn"
-        href={site.urls.eventWebsite}
-        target="_blank"
-        rel="noopener"
-        data-testid="cta-guidance-link"
-      >
+      <Link className="mini-btn" to="/directory" data-testid="cta-guidance-link">
         Explore the event →
-      </a>
+      </Link>
     </div>
   </section>
 );

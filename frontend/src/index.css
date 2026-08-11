@@ -1049,6 +1049,130 @@
     }
 }
 
+/* ---------- competition directory (accordion page) ---------- */
+.directory-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 12px 16px;
+    border: 1px solid var(--line-strong);
+    transition: border-color 0.2s ease;
+}
+.directory-search:focus-within {
+    border-color: var(--gold);
+}
+.directory-search-icon {
+    flex-shrink: 0;
+    color: rgba(22, 18, 19, 0.4);
+}
+.directory-search-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    color: var(--paper);
+}
+.directory-search-input::placeholder {
+    color: rgba(22, 18, 19, 0.4);
+}
+.directory-count {
+    margin-top: 12px;
+    font-family: "Space Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(22, 18, 19, 0.45);
+}
+
+.accordion {
+    margin-top: 16px;
+    border-top: 1px solid var(--line-strong);
+}
+.accordion-row {
+    border-bottom: 1px solid var(--line-strong);
+}
+.accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 16px 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: color 0.2s ease;
+}
+.accordion-header:hover {
+    color: var(--gold);
+}
+.accordion-header-label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: inherit;
+}
+.accordion-icon {
+    flex-shrink: 0;
+    color: var(--gold);
+}
+.accordion-chevron {
+    flex-shrink: 0;
+    color: rgba(22, 18, 19, 0.45);
+    transition: transform 0.3s ease;
+}
+.accordion-chevron.open {
+    transform: rotate(180deg);
+    color: var(--gold);
+}
+.accordion-body-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    transition: grid-template-rows 0.35s ease;
+}
+.accordion-body-wrap.open {
+    grid-template-rows: 1fr;
+}
+.accordion-body-inner {
+    overflow: hidden;
+    min-height: 0;
+}
+.accordion-body {
+    padding: 0 4px 22px;
+}
+.accordion-tags {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+.accordion-native {
+    font-size: 0.95rem;
+    color: rgba(22, 18, 19, 0.55);
+}
+.accordion-desc {
+    font-family: "Inter", sans-serif;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: rgba(22, 18, 19, 0.7);
+}
+.accordion-empty {
+    padding: 32px 4px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 13.5px;
+    color: rgba(22, 18, 19, 0.5);
+}
+
 /* ---------- countdown timer ---------- */
 .countdown {
     margin-top: 22px;

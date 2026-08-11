@@ -4,6 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import Home from "@/pages/Home";
 import Events from "@/pages/Events";
+import Directory from "@/pages/Directory";
 import Contact from "@/pages/Contact";
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/events" element={<Events />} />
+            <Route path="/directory" element={<Directory />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
