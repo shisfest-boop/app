@@ -11,15 +11,19 @@ export const Navbar = () => {
       data-testid="site-navbar"
       className="sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(255,255,255,0.88)] backdrop-blur-md"
     >
-      <div className="wrap flex h-16 items-center justify-between">
+      <div className="wrap flex h-16 items-center justify-between gap-2">
         <Link
           to="/"
           data-testid="nav-brand"
-          className="flex items-center gap-3"
+          className="flex min-w-0 flex-1 items-center gap-2 sm:flex-initial sm:gap-3"
           onClick={() => setOpen(false)}
         >
-          <img src={site.logos.fest} alt="SHISFEST'26 logo" className="h-9 w-9 object-contain" />
-          <span className="font-display text-lg font-extrabold tracking-tight">
+          <img
+            src={site.logos.fest}
+            alt="SHISFEST'26 logo"
+            className="h-8 w-8 flex-shrink-0 object-contain sm:h-9 sm:w-9"
+          />
+          <span className="truncate font-display text-base font-extrabold tracking-tight sm:text-lg">
             SHISFEST<span className="text-gold">'26</span>
           </span>
         </Link>
@@ -41,13 +45,13 @@ export const Navbar = () => {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-shrink-0 items-center gap-1.5 sm:gap-2">
           <a
             href={site.urls.groupRegistration}
             target="_blank"
             rel="noopener"
             data-testid="nav-register-btn"
-            className="bg-gold px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#711824]"
+            className="whitespace-nowrap bg-gold px-3 py-2.5 font-mono text-[10px] uppercase tracking-[0.1em] text-white transition-colors hover:bg-[#711824] sm:px-4 sm:text-[11px] sm:tracking-[0.12em]"
           >
             Register Now
           </a>

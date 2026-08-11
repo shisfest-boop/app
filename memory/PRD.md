@@ -52,4 +52,7 @@ Componentize the working reference landing page (shisfest26.html) for SHISFEST'2
 
 ## Backlog / next tasks
 - P2: Gallery, sponsors section
-- P2: Minor mobile nav-bar overlap at 375px (logo vs Register Now button) — pre-existing, flagged by testing agent
+
+## Bug Fixes (2026-02-11, later same day #3)
+- Fixed mobile Navbar overlap: brand (logo+"SHISFEST'26" text) was not shrinking on narrow viewports, overflowing into the Register Now button. Made brand `min-w-0 flex-1` with `truncate` safety fallback, reduced logo/text/button sizing on mobile (`sm:` breakpoint restores desktop sizing), gave the Register Now + hamburger control group `flex-shrink-0` so it never gets squeezed, added `whitespace-nowrap` + a `gap-2` safety-net gap.
+- Verified via testing_agent_v4 at 320/360/375/390px on Home/Events/Contact: zero overlap, consistent 8px gap, no horizontal overflow, no desktop regression.
