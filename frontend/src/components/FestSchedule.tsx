@@ -1,24 +1,43 @@
-import { Clock, Sparkles, Award } from "lucide-react";
+import { Clock, ClipboardCheck, Coffee, Sparkles, Flame, Award, Sunset } from "lucide-react";
 import { site } from "@/config/site";
 
 const timelineSteps = [
   {
-    time: site.eventDetails.reportingTime,
-    title: "Reporting Time",
-    desc: "All participants must report to the venue and complete check-in.",
+    time: "8:00 a.m.",
+    title: "Arrival",
+    desc: "Doors open and the morning begins — arrive on the SHISFEST'26 campus, take in the buzz, and get ready for a day full of stories, ideas and friendly competition.",
     icon: Clock,
   },
   {
-    time: site.eventDetails.date,
-    title: "Competitions",
-    desc: site.schedule.competitionsNote,
+    time: "By 8:30 a.m.",
+    title: "Registration",
+    desc: "Head to the registration desk to check in your team, collect your participant kit, and get pointed toward your first stop of the day.",
+    icon: ClipboardCheck,
+  },
+  {
+    title: "Breakfast",
+    desc: "A warm breakfast to start things off right — because every great performance deserves a full plate and a moment to settle in before the day begins.",
+    icon: Coffee,
+  },
+  {
+    title: "Opening Ceremony",
+    desc: "The festival officially comes alive — a welcome from the school, a first look at the day ahead, and the spark that sets the tone for everything that follows.",
     icon: Sparkles,
   },
   {
-    time: site.eventDetails.date,
-    title: "Closing Ceremony",
-    desc: site.schedule.closingCeremony,
+    title: "Competitions",
+    desc: "The heart of SHISFEST'26 — running throughout the day, across languages, sciences, arts and more, as students take the stage to think, create and compete.",
+    icon: Flame,
+  },
+  {
+    title: "Prize Distribution",
+    desc: "The moment everyone's been working toward — winners are called up, achievements are celebrated, and the day's best efforts finally get their spotlight.",
     icon: Award,
+  },
+  {
+    title: "Fest Concludes",
+    desc: "As the applause settles, SHISFEST'26 draws to a close — full of memories, new friendships, and the quiet satisfaction of a day well spent.",
+    icon: Sunset,
   },
 ];
 
@@ -44,7 +63,7 @@ export const FestSchedule = () => (
             {i < timelineSteps.length - 1 && <span className="timeline-line" />}
           </div>
           <div className="timeline-content">
-            <span className="timeline-time">{step.time}</span>
+            {step.time && <span className="timeline-time">{step.time}</span>}
             <h3 className="timeline-title">{step.title}</h3>
             <p className="timeline-desc">{step.desc}</p>
           </div>

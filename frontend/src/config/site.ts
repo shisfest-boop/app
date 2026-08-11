@@ -20,10 +20,6 @@ export const site = {
       "Different attire may only be worn if explicitly specified by the competition rules.",
       "I-card has to be worn at all times in the school premises.",
     ],
-    competitionsNote:
-      "All competitions across languages, sciences, arts and more run through the day.",
-    closingCeremony:
-      "The closing ceremony will reveal the winners of all the competitions, enabling students to go home with titles they will be immensely proud of.",
     trophyNote:
       "Students also have a chance to win something much bigger: an Overall Winner Trophy, awarded to the school that wins the maximum number of competitions. It will be informed through the website and personally to the winning school. Scottish High students may take part in all competitions but are not eligible for the School Trophy.",
   },

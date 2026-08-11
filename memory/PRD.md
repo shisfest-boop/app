@@ -54,6 +54,12 @@ Componentize the working reference landing page (shisfest26.html) for SHISFEST'2
 - P2: Gallery, sponsors section
 - P2 (optional/FYI, not a bug): /directory's category substring search matches "Social Science" when searching "science" — intentional per spec (name/category substring match), flagged by testing as expected behavior
 
+## Implemented (2026-02-11, later same day #7)
+- Rewrote Fest Schedule (`FestSchedule.tsx`, on the Contact page) to the exact 7-step day-of sequence: Arrival (8:00 a.m.) → Registration (By 8:30 a.m.) → Breakfast → Opening Ceremony → Competitions → Prize Distribution → Fest Concludes. Removed "Closing Ceremony" entirely (fest simply concludes after Prize Distribution, no ceremony) — confirmed via bundle grep, zero occurrences remain.
+- Rewrote each step's copy to be warmer/longer, matching the hero's voice ("Where ideas compete. Where creativity takes the stage.") — no invented factual details, only descriptive tone. Steps without a stated time (Breakfast onward) render without a time chip.
+- Removed now-unused `site.schedule.competitionsNote`/`closingCeremony` config fields (copy is now defined inline in the component since it's used in exactly one place); kept `dressCode`/`trophyNote` unchanged.
+- Self-tested (small isolated content-only change to one component): compiled cleanly, page loads, correct step order and copy confirmed via screenshot + bundle text verification. No visual/structural redesign — icons, timeline layout, dress-code/trophy sections all unchanged.
+
 ## Implemented (2026-02-11, later same day #6)
 - Universal Navbar search — visible on every page, desktop inline input + mobile icon that expands to a full-width autofocus input (mutually exclusive with the hamburger menu). Submits to `/directory?q=<term>`.
 - New dedicated `/directory` page (`Directory.tsx`) — separate from `/events`, its own on-page search (live filter by name/category, URL-synced via `useSearchParams` with `replace:true`), all 26 events as independently-toggleable accordion rows (CSS-only `grid-template-rows` expand/collapse), collapsed = icon+name+chevron only. Expanded reveals category, full untruncated description (reused from events.ts), participants, and two fields intentionally standardised for every event (not sourced per-event): Venue = "TBA", Reporting Time = "8:00 a.m., 10th October 2026".
