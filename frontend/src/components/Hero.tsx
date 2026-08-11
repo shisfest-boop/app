@@ -1,4 +1,5 @@
 import { site } from "@/config/site";
+import { CountdownTimer } from "@/components/CountdownTimer";
 
 export const Hero = () => (
   <section className="hero" data-testid="home-hero">
@@ -14,5 +15,6 @@ export const Hero = () => (
       <span className="item">{site.school}</span>
       <span className="item">{site.dates}</span>
     </div>
+    <CountdownTimer />
   </section>
 );

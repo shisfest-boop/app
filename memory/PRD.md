@@ -43,7 +43,13 @@ Componentize the working reference landing page (shisfest26.html) for SHISFEST'2
 - New `.info-list`/`.info-row` CSS added for label/value rows, mobile-stacking at ≤480px
 - Tested via testing_agent_v4: 100% pass — exact content match to source doc, no phone numbers found anywhere on page, correct hrefs/target/rel on all links, mobile 375px no overflow, Home/Events unaffected by shared config change.
 
+## Implemented (2026-02-11, later same day #2)
+- Countdown timer (`CountdownTimer.tsx`) on Home Hero — live days/hours/minutes to 10 Oct 2026 08:00 IST, subtle mono/display typography, re-renders every 30s, self-hides after the fest date passes
+- Fest Schedule (`FestSchedule.tsx`) added to Contact page — 3-step vertical timeline (Reporting Time → Competitions → Closing Ceremony) + Dress Code callout (3 rules) + trophy note, content sourced verbatim from `site.ts` `schedule` config (invite's Event Details/Awards sections)
+- Google Maps iframe embed on Contact page showing the venue address (no API key needed, `output=embed` query)
+- Category icons (`CategoryIcon.tsx`) — 14 lucide-react icons mapped 1:1 to each event category, shown inside every EventCard's category tag (Events grid + Home preview)
+- Tested via testing_agent_v4: 100% pass on desktop + mobile (375px), no console errors, no invented schedule/venue content. Noted (not fixed, pre-existing/out of scope): minor mobile nav-bar logo/Register-button overlap at 375px, unrelated to this session's changes.
+
 ## Backlog / next tasks
-- P1: Countdown timer to 10th October 2026
-- P2: Day-wise Fest Schedule section
 - P2: Gallery, sponsors section
+- P2: Minor mobile nav-bar overlap at 375px (logo vs Register Now button) — pre-existing, flagged by testing agent

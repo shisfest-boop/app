@@ -1,4 +1,5 @@
 import { EventData } from "@/data/events";
+import { CategoryIcon } from "@/components/CategoryIcon";
 
 interface EventCardProps {
   event: EventData;
@@ -24,6 +25,7 @@ export const EventCard = ({ event, delay = 0, onView }: EventCardProps) => (
   >
     <div className="event-card-top">
       <span className="event-card-tag" data-testid={`event-card-category-${event.id}`}>
+        <CategoryIcon category={event.category} size={12} className="event-card-tag-icon" />
         {event.category}
       </span>
       <span className="event-card-grades">Grade {event.eligibleGrades}</span>

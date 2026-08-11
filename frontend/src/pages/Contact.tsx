@@ -1,5 +1,6 @@
 import { site } from "@/config/site";
 import { PassCard } from "@/components/PassCard";
+import { FestSchedule } from "@/components/FestSchedule";
 
 export default function Contact() {
   return (
@@ -32,6 +33,18 @@ export default function Contact() {
           <span className="info-value">{site.eventDetails.reportingTime}</span>
         </div>
       </div>
+
+      <div className="map-embed" data-testid="venue-map-embed">
+        <iframe
+          src={`https://www.google.com/maps?q=${encodeURIComponent(site.eventDetails.venue)}&output=embed`}
+          title="SHISFEST'26 venue map"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          allowFullScreen
+        />
+      </div>
+
+      <FestSchedule />
 
       <div className="cta-heading">
         <h2>Get in Touch</h2>
