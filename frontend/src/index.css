@@ -1453,3 +1453,20 @@ footer {
         padding-top: 64px;
     }
 }
+
+/* ---------- large desktop 2x scale (matches 200% browser zoom look) ---------- */
+/* Applied from 1536px real viewport width up: at this width, halving for the
+   scale trick still leaves >=768px of logical layout space, which is the
+   width our existing responsive nav/grid design already renders correctly
+   at (verified, zero overflow at 768-1440px in prior audits). Narrower
+   desktop/tablet widths (768-1535px) are intentionally left unscaled -
+   halving those would squeeze the desktop nav (search + links + register
+   button) into <768px of logical space, which does not fit and causes
+   nav overflow, so they keep today's already-correct layout instead. */
+@media (min-width: 1536px) {
+    body {
+        width: 50vw;
+        zoom: 2;
+        overflow-x: hidden;
+    }
+}
