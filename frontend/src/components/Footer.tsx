@@ -17,9 +17,7 @@ export const Footer = () => (
       <a href={site.urls.instagram} target="_blank" rel="noopener" data-testid="footer-link-instagram">
         Instagram
       </a>
-      <a href={site.urls.contact} target="_blank" rel="noopener" data-testid="footer-link-contact">
-        Contact
-      </a>
+    
     </div>
     <div className="copyright">© 2026 Scottish High International School. All rights reserved.</div>
   </footer>
