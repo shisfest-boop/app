@@ -1,0 +1,51 @@
+{
+  "summary": "Discovery-only responsiveness audit across Home, Events, Directory, Contact pages at 375px/768px/1440px using DOM bounding-box measurements (not visual guessing). Found 2 concrete bugs: (1) Navbar brand text truncates unexpectedly at 1440px desktop despite ample whitespace, caused by fixed .wrap max-width:760px + search input widening at lg breakpoint squeezing the brand flex item. (2) 'View Event' button on EventCard has only ~16.5px tap-target height (no padding), well below the 32px minimum requested, on all breakpoints including mobile. All other checks (Directory accordion, Events modal, DirectoryTable mobile-collapse, Contact timeline/map/info-list, hover-only interaction audit) passed cleanly with no horizontal overflow and no overlaps found. No code fixes applied — audit only, per instructions.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Navbar brand (nav-brand span, Navbar.tsx)",
+        "issue": "At 1440px desktop, brand span 'SHISFEST'26' is TRUNCATED to ~92-100px client width vs 108px content scrollWidth (isTruncated=true, confirmed via DOM: scrollWidth 108 vs clientWidth 100), showing 'SHISFEST…' with ellipsis despite huge unused whitespace on the page (content column capped at .wrap max-width:760px, leaving ~340px empty on each side at 1440px viewport). Root cause: nav-search-desktop input widens from w-28(112px) to lg:w-40(160px) at >=1024px (Tailwind 'lg' breakpoint), which — inside the fixed 760px-wide flex row — squeezes the brand item (className has 'sm:flex-initial' but text span keeps unconditional 'truncate' class) more than at 768px tablet (where brand renders full text untruncated at 156px width, but at 1440px shrinks to 147.95px width, truncating it). Ironically this is a REGRESSION only at desktop; mobile truncation (92px/100px) is the known/intended fallback per file reference notes, but desktop truncation is unintended and unnecessary given the abundant free space.",
+        "selector": "[data-testid=\"nav-brand\"] span",
+        "priority": "MEDIUM"
+      },
+      {
+        "component": "EventCard 'View Event' button (EventCard.tsx / .event-card-btn CSS)",
+        "issue": "Tap target height measured via getBoundingClientRect() is only 16.5px (width 98.5px) at 375px, 768px, and 1440px — well under the requested 32x32px minimum. CSS '.event-card-btn' has 'padding: 0' with no min-height, so the clickable area equals the raw text glyph box, not the visual button area. Same issue likely applies to '.mini-btn' (Download Rulebook link, padding-bottom:3px only) and '.add-calendar-link'.",
+        "selector": "[data-testid^=\"view-event-btn-\"]",
+        "priority": "MEDIUM"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "All pages at 1440px desktop",
+        "issues": [
+          "Content column (.wrap) is capped at max-width:760px even at 1440px viewport, leaving ~340px of empty whitespace on each side. This may be an intentional 'ticket-paper' narrow-column editorial choice, but flagging since it directly caused the navbar truncation bug above by keeping desktop's available flex-row width identical to tablet's while search-input grows wider at the lg breakpoint."
+        ]
+      }
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Fix nav-brand truncation at desktop: either remove 'lg:w-40' growth on nav-search-desktop input, OR give brand a min-width/reserve more space, OR remove unconditional 'truncate' class at md+ breakpoints where flex-initial already prevents brand from growing unexpectedly. Simplest fix: apply truncate only below sm breakpoint (e.g. wrap span truncate logic in a class that's conditionally removed at sm: e.g. use 'sm:truncate-none' equivalent via custom class, or just increase available space).",
+    "Increase '.event-card-btn' tap target to >=32px height via padding (e.g. padding: 8px 4px) while keeping visual text-only look, to meet mobile tap-target accessibility guidance. Consider the same for '.mini-btn' and '.add-calendar-link'.",
+    "(Optional/low priority) Reconsider whether .wrap max-width should scale up at larger breakpoints (e.g. 900-1000px) to better utilize 1440px desktop space, since this the underlying cause of the truncation bug."
+  ],
+  "critical_code_review_comments": [
+    "Navbar.tsx: unconditional 'truncate' class on brand span combined with 'sm:flex-initial' is fragile — it silently truncates whenever any sibling flex item grows (e.g. the lg:w-40 search input), with no safeguard. A min-width or flex-basis anchor on the brand text would make this more robust across future changes.",
+    "EventCard.tsx / index.css '.event-card-btn': zero-padding text buttons are common for this aesthetic but should still meet a minimum tap target via invisible padding/pseudo-element, especially since this is explicitly called out in the audit request.",
+    "Good implementation elsewhere: DirectoryTable mobile stacking (data-label CSS trick), accordion CSS-grid expand/collapse, EventModal scroll containment, and hover styles are all cosmetic-only (verified via grep of all :hover selectors in index.css) — no functionally hover-only interactions found site-wide."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend-only static SPA per request)", "frontend": "Audit only - 2 medium-priority findings out of ~15 checked areas"},
+  "test_credentials": "N/A - no auth in this app",
+  "seed_data_creation": "None - static content, no backend/db",
+  "retest_needed": true,
+  "main_agent_can_self_test": false,
+  "context_for_next_testing_agent": "This was a DISCOVERY-ONLY audit round, no fixes applied. Two concrete findings need fixing then re-verification: (1) navbar brand truncation at 1440px only (use DOM evaluate to check span.scrollWidth > span.clientWidth, not just screenshots — screenshots can be visually ambiguous/misleading due to display scaling), and (2) EventCard 'View Event' button tap target height (measure via getBoundingClientRect(), currently ~16.5px). All other page/breakpoint combinations (Home hero/events-preview/CTA, Events filters/grid/modal/directory-toggle, Directory accordion, Contact info-list/map/timeline/dress-code/reg-group) were verified via precise DOM bounding-box + scrollWidth/clientWidth checks and showed NO horizontal overflow, NO element overlaps, and NO hover-only functional traps anywhere. Recommend re-running the same DOM-measurement approach (not just screenshots) to verify fixes.",
+  "rca_of_issue": "Navbar truncation RCA: .wrap max-width is fixed at 760px starting from the 760px media query, applying identically to both 768px tablet and 1440px desktop viewports. Meanwhile the nav-search-desktop <input> uses Tailwind 'w-28 lg:w-40' (112px -> 160px, +48px) which activates only at the 'lg' breakpoint (1024px+). Since the flex row's total available width stays capped at ~712px (760 - 2*24 padding) regardless of viewport, the extra 48px consumed by the widening search input has to come from somewhere — it comes from shrinking the brand span (flex-initial allows shrink), which drops from 156px (tablet) to 147.95px (desktop), pushing the unconditionally-truncate-classed span below its natural 108px content width (100px client width), causing visible ellipsis truncation only at desktop despite far more viewport real estate being available outside the narrow .wrap column."
+}

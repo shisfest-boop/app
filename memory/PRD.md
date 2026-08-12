@@ -50,9 +50,15 @@ Componentize the working reference landing page (shisfest26.html) for SHISFEST'2
 - Category icons (`CategoryIcon.tsx`) — 14 lucide-react icons mapped 1:1 to each event category, shown inside every EventCard's category tag (Events grid + Home preview)
 - Tested via testing_agent_v4: 100% pass on desktop + mobile (375px), no console errors, no invented schedule/venue content. Noted (not fixed, pre-existing/out of scope): minor mobile nav-bar logo/Register-button overlap at 375px, unrelated to this session's changes.
 
+## Implemented (2026-02-12)
+- Home "The line-up" (EventsPreview) now shows 4 featured cards (Slam Poetry, Tamasha, BioFlix, + Rhythm Revolution added) forming a clean 2x2 grid on tablet/desktop; "View all {count} events" link already dynamic from `events.length`, unchanged.
+- Fixed 2 bugs found by the iteration_8 responsiveness audit: (1) Navbar brand "SHISFEST'26" text was truncating with an unwanted ellipsis at tablet/desktop widths (768px+) despite ample space — fixed by only allowing truncation below the `sm` breakpoint (`sm:overflow-visible` added), mobile fallback truncation preserved/unchanged; (2) Tap targets for "View Event" button, "View all events" / "Download Rulebook" / "Explore the event" links, and "Add to Google Calendar" link were only ~16.5px tall — enlarged to ~36-37px via a net-zero padding+negative-margin technique (no visual/layout shift, purely expands the invisible clickable area) on the shared `.mini-btn`, `.event-card-btn`, `.add-calendar-link` CSS classes.
+- Verified via testing_agent_v4 (iteration_9.json): 100% pass — both fixes confirmed via DOM measurement (scrollWidth/clientWidth, getBoundingClientRect) across Home/Events/Directory/Contact at 375/768/1440px, zero regressions, zero overflow/overlap.
+
 ## Backlog / next tasks
 - P2: Gallery, sponsors section
 - P2 (optional/FYI, not a bug): /directory's category substring search matches "Social Science" when searching "science" — intentional per spec (name/category substring match), flagged by testing as expected behavior
+- P2 (optional, deferred): `.wrap` desktop column stays capped at 760px even at 1440px viewport (large side whitespace) — flagged twice by audits as a design/layout call, not a bug; only revisit if user explicitly wants the content column to scale up on large screens
 
 ## Implemented (2026-02-11, later same day #7)
 - Rewrote Fest Schedule (`FestSchedule.tsx`, on the Contact page) to the exact 7-step day-of sequence: Arrival (8:00 a.m.) → Registration (By 8:30 a.m.) → Breakfast → Opening Ceremony → Competitions → Prize Distribution → Fest Concludes. Removed "Closing Ceremony" entirely (fest simply concludes after Prize Distribution, no ceremony) — confirmed via bundle grep, zero occurrences remain.

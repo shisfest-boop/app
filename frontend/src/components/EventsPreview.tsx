@@ -4,7 +4,7 @@ import { events, EventData } from "@/data/events";
 import { EventCard } from "@/components/EventCard";
 import { EventModal } from "@/components/EventModal";
 
-const featuredIds = ["slam-poetry", "tamasha", "bioflix"];
+const featuredIds = ["slam-poetry", "tamasha", "bioflix", "rhythm-revolution"];
 
 export const EventsPreview = () => {
   const [selectedEvent, setSelectedEvent] = useState<EventData | null>(null);

@@ -33,7 +33,7 @@ export const Navbar = () => {
             alt="SHISFEST'26 logo"
             className="h-8 w-8 flex-shrink-0 object-contain sm:h-9 sm:w-9"
           />
-          <span className="truncate font-display text-base font-extrabold tracking-tight sm:text-lg">
+          <span className="truncate font-display text-base font-extrabold tracking-tight sm:overflow-visible sm:text-lg">
             SHISFEST<span className="text-gold">'26</span>
           </span>
         </Link>
