@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import { events, EventData } from "@/data/events";
 import { EventCard } from "@/components/EventCard";
 import { EventModal } from "@/components/EventModal";
 
-const featuredIds = ["slam-poetry", "tamasha", "bioflix", "rhythm-revolution"];
+const featuredIds = ["slam-poetry", "tamasha", "bioflix"];
 
 export const EventsPreview = () => {
   const [selectedEvent, setSelectedEvent] = useState<EventData | null>(null);
@@ -23,11 +24,17 @@ export const EventsPreview = () => {
         {featured.map((event, i) => (
           <EventCard key={event.id} event={event} delay={0.7 + i * 0.08} onView={setSelectedEvent} />
         ))}
+        <Link
+          to="/events"
+          className="event-card view-all-card"
+          style={{ animationDelay: `${0.7 + featured.length * 0.08}s` }}
+          data-testid="events-preview-view-all"
+        >
+          <ArrowRight size={22} className="view-all-card-icon" />
+          <span className="view-all-card-title">View All {events.length} Events</span>
+          <span className="view-all-card-sub">See the full line-up →</span>
+        </Link>
       </div>
-
-      <Link to="/events" className="mini-btn" data-testid="events-preview-view-all">
-        View all {events.length} events →
-      </Link>
 
       <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
     </section>

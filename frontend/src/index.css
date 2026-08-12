@@ -780,6 +780,36 @@
     color: #711824;
 }
 
+.view-all-card {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.view-all-card-icon {
+    color: var(--gold);
+    transition: transform 0.2s ease;
+}
+.view-all-card:hover .view-all-card-icon {
+    transform: translateX(4px);
+}
+.view-all-card-title {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+    color: var(--paper);
+}
+.view-all-card-sub {
+    font-family: "Space Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+}
+
 @media (min-width: 640px) {
     .events-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1183,15 +1213,15 @@
 }
 .countdown-tag {
     font-family: "Space Mono", monospace;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: rgba(22, 18, 19, 0.4);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 .countdown-units {
     display: flex;
-    gap: 26px;
+    gap: 34px;
 }
 .countdown-unit {
     display: flex;
@@ -1200,18 +1230,18 @@
 .countdown-value {
     font-family: "Bricolage Grotesque", sans-serif;
     font-weight: 800;
-    font-size: 1.6rem;
+    font-size: 2.4rem;
     color: var(--gold);
     line-height: 1;
     letter-spacing: -0.01em;
 }
 .countdown-label {
     font-family: "Space Mono", monospace;
-    font-size: 9.5px;
+    font-size: 10.5px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: rgba(22, 18, 19, 0.4);
-    margin-top: 5px;
+    margin-top: 6px;
 }
 
 /* ---------- add to calendar ---------- */
